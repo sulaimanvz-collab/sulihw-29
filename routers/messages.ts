@@ -45,4 +45,25 @@ messagesRouter.post("/", async (req, res) => {
   }
 });
 
+messagesRouter.get("/", async (req, res) => {
+  try {
+    await ensureDirectoryExists();
+    const files = await fs.readdir(messagesDir);
+
+    const lastFiveFiles = files.sort().slice(-5);
+    const result: SavedMessage[] = [];
+
+    for (const file of lastFiveFiles) {
+      const filePath = path.join(messagesDir, file);
+      const fileContents = await fs.readFile(filePath, "utf-8");
+      result.push(JSON.parse(fileContents) as SavedMessage);
+    }
+
+    res.send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Server error" });
+  }
+});
+
 export default messagesRouter;
