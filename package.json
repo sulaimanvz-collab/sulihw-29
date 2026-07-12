@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.ts",
-  "scripts": {
-    "dev": "nodemon index.ts"
-  },
+"scripts": {
+  "dev": "nodemon --exec node --experimental-strip-types index.ts"
+},
   "dependencies": {
     "express": "^4.19.2"
   },

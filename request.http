@@ -1,0 +1,6 @@
+POST http://localhost:8000/messages
+Content-Type: application/json
+
+{
+  "message": "верь в мою веру в тебя симон"
+}
